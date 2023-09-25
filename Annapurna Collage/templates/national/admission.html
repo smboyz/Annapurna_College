@@ -1,0 +1,771 @@
+{% extends "national/base.html" %}
+{% load static %}
+{% block content %}
+    <!-- admission banner section start -->
+    {% for admission in adm %}
+        <section class="position-relative">
+            <img class="w-100"
+                 style="max-height: 400px;
+                        object-fit:cover"
+                 src="{{ admission.slider_image.url }}"
+                 alt="">
+            <h2 class="position-absolute banner_title text-center">{{ admission.caption }}</h2>
+            <div class="position-absolute"
+                 style="top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: black;
+                        opacity: 0.65;"></div>
+            <div class="position-absolute bread_crumb photo_video"
+                 aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ admission.name }}</li>
+                </ol>
+            </div>
+        </section>
+        <!-- admission banner section end -->
+        <!-- admission procedure section start -->
+        <section style="background:#b8bfc423; padding: 3% 0;">
+            <div class="container">
+                <div class="d-flex">
+                    <h5 class="title-line">{{ admission.title }}</h5>
+                </div>
+                <p>
+                    {% autoescape off %}
+                        {{ admission.short_desc }}
+                    {% endautoescape %}
+                </p>
+            </div>
+        </section>
+        <!-- admission procedure section end -->
+        <!-- online form fill up section start -->
+        <section class="py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <img style="width: 15%" src="{{ admission.bannerimage.url }}" alt="">
+                        <div class="d-flex justify-content-center">
+                            <h5 class="title-line">{{ admission.meta_title }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                         role="alert">
+                        <strong></strong> {{ message }}
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+                <div class="my-5">
+                    <div class="row">
+                        <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                            <h4>Personal Details</h4>
+                        </div>
+                    </div>
+                    <form action="{% url 'admission' %}"
+                          method="POST"
+                          enctype="multipart/form-data"
+                          class="py-4">
+                        {% csrf_token %}
+                        <div class="row pb-4" style="row-gap: 20px;">
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>Full Name</label>
+                                </h5>
+                                <input class="form-control"
+                                       type="text"
+                                       name="name"
+                                       id="name"
+                                       placeholder="full name"
+                                       required="required">
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>Gender</label>
+                                </h5>
+                                <select name="gender" id="gender" class="form-control" required="required">
+                                    <option value="">-</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>Upload PP size photo</label>
+                                </h5>
+                                <input class="form-control"
+                                       type="file"
+                                       id="passport_image"
+                                       name="passport_image"
+                                       accept="image/*">
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="dob">Date of Birth</label>
+                                </h5>
+                                <input class="form-control"
+                                       type="date"
+                                       name="dateofbirth"
+                                       id="dateofbirth"
+                                       required="required">
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>Email</label>
+                                </h5>
+                                <input class="form-control"
+                                       type="email"
+                                       id="email"
+                                       name="email"
+                                       placeholder="email"
+                                       required="required">
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>Mobile</label>
+                                </h5>
+                                <input class="form-control"
+                                       type="text"
+                                       name="mobile"
+                                       id="mobile"
+                                       placeholder="mobile number"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Current Address</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Province</label>
+                                    </h5>
+                                    <select name="province"
+                                            id="province"
+                                            class="form-control"
+                                            required="required">
+                                        <option value="province no 1">Province no 1</option>
+                                        <option value="madhesh">Madhesh Province</option>
+                                        <option value="bagmati">Bagmati Province</option>
+                                        <option value="gandaki">Gandaki Province</option>
+                                        <option value="lumbini">Lumbini Province</option>
+                                        <option value="karnali">Karnali Province</option>
+                                        <option value="sudur pashchim">Sudur Pashchim Province</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>District</label>
+                                    </h5>
+                                    <select class="form-control"
+                                            name="district"
+                                            id="district"
+                                            required="required">
+                                        %{--Mechi--}%
+                                        <option value="">--Select District--</option>
+                                        <option value="Taplejung">Taplejung</option>
+                                        <option value="Panchthar">Panchthar</option>
+                                        <option value="Ilam">Ilam</option>
+                                        <option value="Jhapa">Jhapa</option>
+                                        %{--Koshi--}%
+                                        <option value="Morang">Morang</option>
+                                        <option value="Sunsari">Sunsari</option>
+                                        <option value="Dhankutta">Dhankutta</option>
+                                        <option value="Sankhuwasabha">Sankhuwasabha</option>
+                                        <option value="Bhojpur">Bhojpur</option>
+                                        <option value="Terhathum">Terhathum</option>
+                                        %{--Sagarmatha--}%
+                                        <option value="Okhaldunga">Okhaldunga</option>
+                                        <option value="Khotang">Khotang</option>
+                                        <option value="Solukhumbu">Solukhumbu</option>
+                                        <option value="Udaypur">Udaypur</option>
+                                        <option value="Saptari">Saptari</option>
+                                        <option value="Siraha">Siraha</option>
+                                        %{--Janakpur--}%
+                                        <option value="Dhanusa">Dhanusa</option>
+                                        <option value="Mahottari">Mahottari</option>
+                                        <option value="Sarlahi">Sarlahi</option>
+                                        <option value="Sindhuli">Sindhuli</option>
+                                        <option value="Ramechhap">Ramechhap</option>
+                                        <option value="Dolkha">Dolkha</option>
+                                        %{--Bagmati--}%
+                                        <option value="Sindhupalchauk">Sindhupalchauk</option>
+                                        <option value="Kavreplanchauk">Kavreplanchauk</option>
+                                        <option value="Lalitpur">Lalitpur</option>
+                                        <option value="Bhaktapur">Bhaktapur</option>
+                                        <option value="Kathmandu">Kathmandu</option>
+                                        <option value="Nuwakot">Nuwakot</option>
+                                        <option value="Rasuwa">Rasuwa</option>
+                                        <option value="Dhading">Dhading</option>
+                                        %{--Narayani--}%
+                                        <option value="Makwanpur">Makwanpur</option>
+                                        <option value="Rauthat">Rauthat</option>
+                                        <option value="Bara">Bara</option>
+                                        <option value="Parsa">Parsa</option>
+                                        <option value="Chitwan">Chitwan</option>
+                                        %{--Gandaki--}%
+                                        <option value="Gorkha">Gorkha</option>
+                                        <option value="Lamjung">Lamjung</option>
+                                        <option value="Tanahun">Tanahun</option>
+                                        <option value="Tanahun">Tanahun</option>
+                                        <option value="Syangja">Syangja</option>
+                                        <option value="Kaski">Kaski</option>
+                                        <option value="Manag">Manag</option>
+                                        %{--Dhawalagiri--}%
+                                        <option value="Mustang">Mustang</option>
+                                        <option value="Parwat">Parwat</option>
+                                        <option value="Myagdi">Myagdi</option>
+                                        <option value="Myagdi">Myagdi</option>
+                                        <option value="Baglung">Baglung</option>
+                                        %{--Lumbini--}%
+                                        <option value="Gulmi">Gulmi</option>
+                                        <option value="Palpa">Palpa</option>
+                                        <option value="Nawalparasi">Nawalparasi</option>
+                                        <option value="Rupandehi">Rupandehi</option>
+                                        <option value="Arghakhanchi">Arghakhanchi</option>
+                                        <option value="Kapilvastu">Kapilvastu</option>
+                                        %{--Rapti--}%
+                                        <option value="Pyuthan">Pyuthan</option>
+                                        <option value="Rolpa">Rolpa</option>
+                                        <option value="Rukum">Rukum</option>
+                                        <option value="Salyan">Salyan</option>
+                                        <option value="Dang">Dang</option>
+                                        %{--Bheri--}%
+                                        <option value="Bardiya">Bardiya</option>
+                                        <option value="Surkhet">Surkhet</option>
+                                        <option value="Dailekh">Dailekh</option>
+                                        <option value="Banke">Banke</option>
+                                        <option value="Jajarkot">Jajarkot</option>
+                                        %{--Karnali--}%
+                                        <option value="Dolpa">Dolpa</option>
+                                        <option value="Humla">Humla</option>
+                                        <option value="Kalikot">Kalikot</option>
+                                        <option value="Mugu">Mugu</option>
+                                        <option value="Jumla">Jumla</option>
+                                        %{--Seti--}%
+                                        <option value="Bajura">Bajura</option>
+                                        <option value="Bajhang">Bajhang</option>
+                                        <option value="Achham">Achham</option>
+                                        <option value="Doti">Doti</option>
+                                        <option value="Kailali">Kailali</option>
+                                        %{--Mahakali--}%
+                                        <option value="Kanchanpur">Kanchanpur</option>
+                                        <option value="Dadeldhura">Dadeldhura</option>
+                                        <option value="Baitadi">Baitadi</option>
+                                        <option value="Darchula">Darchula</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Municipality</label>
+                                    </h5>
+                                    <input type="text"
+                                           name="municipality"
+                                           id="municipality"
+                                           class="form-control"
+                                           placeholder="municipality"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Ward no</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="number"
+                                           name="ward_no"
+                                           id="ward_no"
+                                           placeholder="ward no"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Tole</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           id="tole"
+                                           name="tole"
+                                           placeholder="tole"
+                                           required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Permanent Address</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Province</label>
+                                    </h5>
+                                    <select name="province_1"
+                                            id="province_1"
+                                            class="form-control"
+                                            required="required">
+                                        <option value="province no 1">Province no 1</option>
+                                        <option value="madhesh">Madhesh Province</option>
+                                        <option value="bagmati">Bagmati Province</option>
+                                        <option value="gandaki">Gandaki Province</option>
+                                        <option value="lumbini">Lumbini Province</option>
+                                        <option value="karnali">Karnali Province</option>
+                                        <option value="sudur pashchim">Sudur Pashchim Province</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>District</label>
+                                    </h5>
+                                    <select class="form-control"
+                                            name="district_1"
+                                            id="district_1"
+                                            required="required">
+                                        %{--Mechi--}%
+                                        <option value="">--Select District--</option>
+                                        <option value="Taplejung">Taplejung</option>
+                                        <option value="Panchthar">Panchthar</option>
+                                        <option value="Ilam">Ilam</option>
+                                        <option value="Jhapa">Jhapa</option>
+                                        %{--Koshi--}%
+                                        <option value="Morang">Morang</option>
+                                        <option value="Sunsari">Sunsari</option>
+                                        <option value="Dhankutta">Dhankutta</option>
+                                        <option value="Sankhuwasabha">Sankhuwasabha</option>
+                                        <option value="Bhojpur">Bhojpur</option>
+                                        <option value="Terhathum">Terhathum</option>
+                                        %{--Sagarmatha--}%
+                                        <option value="Okhaldunga">Okhaldunga</option>
+                                        <option value="Khotang">Khotang</option>
+                                        <option value="Solukhumbu">Solukhumbu</option>
+                                        <option value="Udaypur">Udaypur</option>
+                                        <option value="Saptari">Saptari</option>
+                                        <option value="Siraha">Siraha</option>
+                                        %{--Janakpur--}%
+                                        <option value="Dhanusa">Dhanusa</option>
+                                        <option value="Mahottari">Mahottari</option>
+                                        <option value="Sarlahi">Sarlahi</option>
+                                        <option value="Sindhuli">Sindhuli</option>
+                                        <option value="Ramechhap">Ramechhap</option>
+                                        <option value="Dolkha">Dolkha</option>
+                                        %{--Bagmati--}%
+                                        <option value="Sindhupalchauk">Sindhupalchauk</option>
+                                        <option value="Kavreplanchauk">Kavreplanchauk</option>
+                                        <option value="Lalitpur">Lalitpur</option>
+                                        <option value="Bhaktapur">Bhaktapur</option>
+                                        <option value="Kathmandu">Kathmandu</option>
+                                        <option value="Nuwakot">Nuwakot</option>
+                                        <option value="Rasuwa">Rasuwa</option>
+                                        <option value="Dhading">Dhading</option>
+                                        %{--Narayani--}%
+                                        <option value="Makwanpur">Makwanpur</option>
+                                        <option value="Rauthat">Rauthat</option>
+                                        <option value="Bara">Bara</option>
+                                        <option value="Parsa">Parsa</option>
+                                        <option value="Chitwan">Chitwan</option>
+                                        %{--Gandaki--}%
+                                        <option value="Gorkha">Gorkha</option>
+                                        <option value="Lamjung">Lamjung</option>
+                                        <option value="Tanahun">Tanahun</option>
+                                        <option value="Tanahun">Tanahun</option>
+                                        <option value="Syangja">Syangja</option>
+                                        <option value="Kaski">Kaski</option>
+                                        <option value="Manag">Manag</option>
+                                        %{--Dhawalagiri--}%
+                                        <option value="Mustang">Mustang</option>
+                                        <option value="Parwat">Parwat</option>
+                                        <option value="Myagdi">Myagdi</option>
+                                        <option value="Myagdi">Myagdi</option>
+                                        <option value="Baglung">Baglung</option>
+                                        %{--Lumbini--}%
+                                        <option value="Gulmi">Gulmi</option>
+                                        <option value="Palpa">Palpa</option>
+                                        <option value="Nawalparasi">Nawalparasi</option>
+                                        <option value="Rupandehi">Rupandehi</option>
+                                        <option value="Arghakhanchi">Arghakhanchi</option>
+                                        <option value="Kapilvastu">Kapilvastu</option>
+                                        %{--Rapti--}%
+                                        <option value="Pyuthan">Pyuthan</option>
+                                        <option value="Rolpa">Rolpa</option>
+                                        <option value="Rukum">Rukum</option>
+                                        <option value="Salyan">Salyan</option>
+                                        <option value="Dang">Dang</option>
+                                        %{--Bheri--}%
+                                        <option value="Bardiya">Bardiya</option>
+                                        <option value="Surkhet">Surkhet</option>
+                                        <option value="Dailekh">Dailekh</option>
+                                        <option value="Banke">Banke</option>
+                                        <option value="Jajarkot">Jajarkot</option>
+                                        %{--Karnali--}%
+                                        <option value="Dolpa">Dolpa</option>
+                                        <option value="Humla">Humla</option>
+                                        <option value="Kalikot">Kalikot</option>
+                                        <option value="Mugu">Mugu</option>
+                                        <option value="Jumla">Jumla</option>
+                                        %{--Seti--}%
+                                        <option value="Bajura">Bajura</option>
+                                        <option value="Bajhang">Bajhang</option>
+                                        <option value="Achham">Achham</option>
+                                        <option value="Doti">Doti</option>
+                                        <option value="Kailali">Kailali</option>
+                                        %{--Mahakali--}%
+                                        <option value="Kanchanpur">Kanchanpur</option>
+                                        <option value="Dadeldhura">Dadeldhura</option>
+                                        <option value="Baitadi">Baitadi</option>
+                                        <option value="Darchula">Darchula</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Municipality</label>
+                                    </h5>
+                                    <input type="text"
+                                           name="municipality_1"
+                                           id="municipality_1"
+                                           class="form-control"
+                                           placeholder="municipality"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Ward no</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="number"
+                                           name="ward_no_1"
+                                           id="ward_no_1"
+                                           placeholder="ward no"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Tole</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           id="tole_1"
+                                           name="tole_1"
+                                           placeholder="tole"
+                                           required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Parent's Information</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Father Name</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="father_name"
+                                           id="father_name"
+                                           placeholder="father name"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Father's Mobile</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="father_no"
+                                           id="father_no"
+                                           placeholder="father's mobile"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Mother Name</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="mother_name"
+                                           id="mother_name"
+                                           placeholder="mother name"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>Mother's Mobile</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="mother_no"
+                                           id="mother_no"
+                                           placeholder="mother's mobile">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Educational Details</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>School's Name</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="school_name"
+                                           id="school_name"
+                                           placeholder="school name"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>SEE Passed Year</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="date"
+                                           name="pass_year"
+                                           id="pass_year"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>SEE Otained Score(GPA)</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="text"
+                                           name="score"
+                                           id="score"
+                                           placeholder="obtained score(GPA)"
+                                           required="required">
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label>SEE certificate</label>
+                                    </h5>
+                                    <input class="form-control"
+                                           type="file"
+                                           id="certificate"
+                                           name="certificate"
+                                           accept="*"
+                                           required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Course Preference</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-1">
+                                            <h5>
+                                                <label>Shift:</label>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="radio"
+                                                   name="shift"
+                                                   value="morning"
+                                                   id="shift"
+                                                   required="required">
+                                            <label>Morning</label>
+                                            &nbsp;
+                                            <input type="radio" name="shift" value="day" id="shift" required="required">
+                                            <label>Day</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="science" name="science" value="Science">
+                                            <label style="color: #0C2EF6; font-size: 20px;">Science</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="biologys" name="biologys" value="Biology">
+                                            <label>Biology</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox"
+                                                   id="computers"
+                                                   name="computers"
+                                                   value="computer Science">
+                                            <label>Computer Science</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="management" name="management" value="Management">
+                                            <label style="color: #0C2EF6; font-size: 20px;">Management</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="businesss" name="businesss" value=" Business Studies">
+                                            <label>Option-1 Business Studies</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox"
+                                                   id="computerscis"
+                                                   name="computerscis"
+                                                   value="Computer Science
+                                                   ">
+                                            <label>Option-2 Computer Science</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox"
+                                                   id="hotelmanagements"
+                                                   name="hotelmanagements"
+                                                   value="Hotel management">
+                                            <label>Option-3 Hotel management</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="t_ms" name="t_ms" value="T. & M.">
+                                            <label>Option-4 T. & M.</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox"
+                                                   id="socialmath"
+                                                   name="socialmath"
+                                                   value="Social/Maths">
+                                            <label>
+                                                Option-5
+                                                Social/Maths
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="humanities" name="humanities" value="Humanities">
+                                            <label style="color: #0C2EF6; font-size: 20px;">Humanities</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox"
+                                                   id="masscomms"
+                                                   name="masscomms"
+                                                   value="mass comm & journalism">
+                                            <label>Mass Comm. & Journalism</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="sociologys" name="sociologys" value="Sociology">
+                                            <label>Sociology</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="t_mhs" name="t_mhs" value=" T. & M.">
+                                            <label>T. & M.</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="populations" name="populations" value="Population">
+                                            <label>Population</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" id="rurals" name="rurals" value="Rural Development">
+                                            <label>
+                                                Rural
+                                                Development
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Transportation / Hostel Facilities</h4>
+                            </div>
+                        </div>
+                        <div class="py-5">
+                            <div class="row">
+                                <div class="col-lg-6 p-3"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <label for="">Do you require transportation facilites?</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <input type="radio" id="transport" name="transport" value="Yes">
+                                                    <label>Yes</label>
+                                                </li>
+                                                <li class="my-2">
+                                                    <input type="radio" id="transport" name="transport" value="No">
+                                                    <label>No</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <input type="radio" id="ways" name="ways" value="One way">
+                                                    <label>One way</label>
+                                                </li>
+                                                <li class="my-2">
+                                                    <input type="radio" id="ways" name="ways" value="Two way">
+                                                    <label>Two way</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <label>Destination</label>
+                                                </li>
+                                                <input class="form-control" type="text" name="destination" id="destination">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 p-3"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <label for="">Do you require hostel facilities?</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <input type="radio" id="hostel" name="hostel" value="Yes">
+                                                    <label>Yes</label>
+                                                </li>
+                                                <li class="my-2">
+                                                    <input type="radio" id="hostel" name="hostel" value="No">
+                                                    <label>No</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        {% endfor %}
+        <!-- online form fill up section end -->
+    {% endblock content %}

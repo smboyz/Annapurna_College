@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+             id="navbarBlur"
+             navbar-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <h6 class="font-weight-bolder mb-0"></h6>
+                </nav>
+            </div>
+        </nav>
+        <!-- online form fill up section start -->
+        <section class="py-3">
+            <div class="container d-flex flex-column align-items-end">
+                <a href="{% url 'generate-pdf' con.id %}" class="btn btn-primary">Download PDF</a>
+                <div class="row w-100">
+                    <div class="col-lg-12 text-center">
+                        <img style="width: 15%"
+                             src="{% static 'annapurna/image/logo.jpg' %}"
+                             alt="">
+                        <div class="d-flex justify-content-center">
+                            <h5 style="border-bottom: 2px solid red;">Online Application Form</h5>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} {% for con in con %} {% endcomment %}
+                <div class="my-5 w-100">
+                    <div class="row">
+                        <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                            <h4>Personal Details</h4>
+                        </div>
+                    </div>
+                    <form action="#" method="post" enctype="multipart/form-data" class="py-4">
+                        <div class="row pb-4" style="row-gap: 20px;">
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="fullName">Full Name</label>
+                                </h5>
+                                <p class="form-control" name="gender" id="gender">{{ con.name }}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="gender">Gender</label>
+                                </h5>
+                                <p class="form-control" name="gender" id="gender">{{ con.gender }}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label>PP size photo</label>
+                                </h5>
+                                {% if con.passport_image %}
+                                    <p class="form-control" name="passport_image" id="passport_image">{{ con.passport_image }}</p>
+                                    <a target="_blank" href="{{ con.passport_image.url }}">
+                                        <img src="{{ con.passport_image.url }}"
+                                             style="width: auto;
+                                                    height: 100px;
+                                                    object-fit: cover">
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="dob">Date of Birth</label>
+                                </h5>
+                                <p class="form-control" name="dateofbirth" id="dateofbirth">{{ con.dateofbirth }}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="email">Email</label>
+                                </h5>
+                                <p class="form-control" name="email" id="email">{{ con.email }}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>
+                                    <label for="mobile">Mobile</label>
+                                </h5>
+                                <p class="form-control" name="mobile" id="mobile">{{ con.mobile }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Current Address</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="province">Province</label>
+                                    </h5>
+                                    <p class="form-control" name="province" id="province">{{ con.province }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="">District</label>
+                                    </h5>
+                                    <p class="form-control" name="district" id="district">{{ con.district }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="municipality">Municipality</label>
+                                    </h5>
+                                    <p class="form-control" name="municipality" id="municipality">{{ con.municipality }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="ward">Ward no</label>
+                                    </h5>
+                                    <p class="form-control" name="ward_no" id="ward_no">{{ con.ward_no }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="tole">Tole</label>
+                                    </h5>
+                                    <p class="form-control" name="tole" id="tole">{{ con.tole }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Permanent Address</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="province1">Province</label>
+                                    </h5>
+                                    <p class="form-control" name="province_1" id="province_1">{{ con.province_1 }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="">District</label>
+                                    </h5>
+                                    <p class="form-control" name="district_1" id="district_1">{{ con.district_1 }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="municipality1">Municipality</label>
+                                    </h5>
+                                    <p class="form-control" name="municipality_1" id="municipality_1">{{ con.municipality_1 }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="ward1">Ward no</label>
+                                    </h5>
+                                    <p class="form-control" name="ward_no_1" id="ward_no_1">{{ con.ward_no_1 }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="tole1">Tole</label>
+                                    </h5>
+                                    <p class="form-control" name="tole_1" id="tole_1">{{ con.tole_1 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Parent's Information</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="fatherName">Father Name</label>
+                                    </h5>
+                                    <p class="form-control" name="father_name" id="father_name">{{ con.father_name }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="fathersMobile">Father's Mobile</label>
+                                    </h5>
+                                    <p class="form-control" name="father_no" id="father_no">{{ con.father_no }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="motherName">Mother Name</label>
+                                    </h5>
+                                    <p class="form-control" name="mother_name" id="mother_name">{{ con.mother_name }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="mothersMobile">Mother's Mobile</label>
+                                    </h5>
+                                    <p class="form-control" name="mother_no" id="mother_no">{{ con.mother_no }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Educational Details</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row" style="row-gap: 20px;">
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="schoolName">School's Name</label>
+                                    </h5>
+                                    <p class="form-control" name="school_name" id="school_name">{{ con.school_name }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="seeYear">SEE Passed Year</label>
+                                    </h5>
+                                    <p class="form-control" name="pass_year" id="pass_year">{{ con.pass_year }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="seeGPA">SEE Otained Score(GPA)</label>
+                                    </h5>
+                                    <p class="form-control" name="score" id="score">{{ con.score }}</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5>
+                                        <label for="seeCertificate">SEE certificate in pdf format</label>
+                                    </h5>
+                                    {% if con.certificate %}
+                                        <p class="form-control" name="certificate" id="certificate">{{ con.certificate }}</p>
+                                        <a target="_blank" href="{{ con.certificate.url }}">
+                                            <img src="{{ con.certificate.url }}" style="max-width: 50%; height: auto">
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Course Preference</h4>
+                            </div>
+                        </div>
+                        <div class="py-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-1">
+                                            <h5>
+                                                <label for="schoolName">Shift:</label>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p class="form-control" name="shift" id="shift">{{ con.shift }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <p id="science" name="science">{{ con.science }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="biologys" name="biologys">{{ con.biologys }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="computers" name="computers">{{ con.computers }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <p id="management" name="management">{{ con.management }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="businesss" name="businesss">{{ con.businesss }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="computerscis" name="computerscis">{{ con.computerscis }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="hotelmanagements" name="hotelmanagements">{{ con.hotelmanagements }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="t_ms" name="t_ms">{{ con.t_ms }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="socialmath" name="socialmath">{{ con.socialmath }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <ul class="list-group list-group-flush py-3">
+                                        <li class="list-group-item">
+                                            <p id="humanities" name="humanities">{{ con.humanities }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="masscomms" name="masscomms">{{ con.masscomms }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="sociologys" name="sociologys">{{ con.sociologys }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="t_mhs" name="t_mhs">{{ con.t_mhs }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="populations" name="populations">{{ con.populations }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p id="rurals" name="rurals">{{ con.rurals }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center p-4" style="background-color: #754c4c42">
+                                <h4>Transportation / Hostel Facilities</h4>
+                            </div>
+                        </div>
+                        <div class="py-5">
+                            <div class="row">
+                                <div class="col-lg-6 p-3"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <label for="">Do you require transportation facilites?</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <p name="transport">{{ con.transport }}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <p name="ways">{{ con.ways }}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <label for="destination">Destination</label>
+                                                </li>
+                                                <p name="destination">{{ con.destination }}</p>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 p-3"
+                                     style="box-shadow: 3px 3px 15px rgba(190, 187, 183, 0.534)">
+                                    <label for="">Do you require hostel facilities?</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <ul class="py-3">
+                                                <li>
+                                                    <p name="hostel">{{ con.hostel }}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <a href="{% url 'admissions' %}" class="btn btn-primary">Back</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% comment %} {% endfor %} {% endcomment %}
+            </section>
+            <!-- online form fill up section end -->
+        {% endblock content %}

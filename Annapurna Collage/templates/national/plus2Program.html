@@ -1,0 +1,222 @@
+{% extends "national/base.html" %}
+{% load static %}
+{% block content %}
+    <!-- plus2 banner section start -->
+    {% for plus in plus2 %}
+        <section class="position-relative">
+            <img class="w-100"
+                 style="max-height: 400px;
+                        object-fit: cover"
+                 src="{{ plus.slider_image.url }}"
+                 alt="" />
+            <h2 class="position-absolute banner_title text-center">{{ plus.caption }}</h2>
+            <div class="position-absolute"
+                 style="top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: black;
+                        opacity: 0.65;"></div>
+            <div class="position-absolute bread_crumb photo_video"
+                 aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ plus.title }}</li>
+                </ol>
+            </div>
+        </section>
+    {% endfor %}
+    <!-- plus2 banner section end -->
+    <!-- program section start -->
+    <section style="background: #b8bfc423; padding: 3% 0">
+        <div class="container">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                {% for subject in sub %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if forloop.first %}active{% endif %} program_nav"
+                                id="pills-home-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#{{ subject.icon_image }}"
+                                type="button"
+                                role="tab"
+                                aria-controls="{{ subject.icon_image }}"
+                                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                            {{ subject.name }}
+                        </button>
+                    </li>
+                {% endfor %}
+                {% comment %} <li class="nav-item" role="presentation">
+                    <button class="nav-link program_nav" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Management</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link program_nav" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Humanities</button>
+                </li> {% endcomment %}
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active"
+                     id="pills-home"
+                     role="tabpanel"
+                     aria-labelledby="pills-home-tab"
+                     tabindex="0">
+                    <div>
+                        {% for science in sci %}
+                            <div class="my-4">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ science.caption }}</h5>
+                                </div>
+                                <p style="text-align: justify">
+                                    {% autoescape off %}
+                                        {{ science.desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ science.title }}</h5>
+                                </div>
+                                <p>
+                                    {% autoescape off %}
+                                        {{ science.short_desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                        {% for science in sci_1 %}
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ science.caption }}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <ul class="list-group list-group-flush">
+                                            {% autoescape off %}
+                                                {{ science.short_desc }}
+                                            {% endautoescape %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-4" data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ science.title }}</h5>
+                                </div>
+                                {% autoescape off %}
+                                    {{ science.desc }}
+                                {% endautoescape %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade"
+                     id="pills-profile"
+                     role="tabpanel"
+                     aria-labelledby="pills-profile-tab"
+                     tabindex="0">
+                    <div>
+                        {% for management in man %}
+                            <div class="my-4">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ management.caption }}</h5>
+                                </div>
+                                <p style="text-align: justify">
+                                    {% autoescape off %}
+                                        {{ management.short_desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ management.title }}</h5>
+                                </div>
+                                <p>
+                                    {% autoescape off %}
+                                        {{ management.desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                        {% for management in man_1 %}
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ management.caption }}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <ul class="list-group list-group-flush">
+                                            {% autoescape off %}
+                                                {{ management.short_desc }}
+                                            {% endautoescape %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-4" data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ management.title }}</h5>
+                                </div>
+                                {% autoescape off %}
+                                    {{ management.desc }}
+                                {% endautoescape %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade"
+                     id="pills-contact"
+                     role="tabpanel"
+                     aria-labelledby="pills-contact-tab"
+                     tabindex="0">
+                    <div>
+                        {% for humanities in hum %}
+                            <div class="my-4">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ humanities.caption }}</h5>
+                                </div>
+                                <p style="text-align: justify">
+                                    {% autoescape off %}
+                                        {{ humanities.short_desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ humanities.title }}</h5>
+                                </div>
+                                <p>
+                                    {% autoescape off %}
+                                        {{ humanities.desc }}
+                                    {% endautoescape %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                        {% for humanities in hum_1 %}
+                            <div data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ humanities.caption }}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <ul class="list-group list-group-flush">
+                                            {% autoescape off %}
+                                                {{ humanities.short_desc }}
+                                            {% endautoescape %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-4" data-aos="zoom-in">
+                                <div class="d-flex">
+                                    <h5 class="title-line">{{ humanities.title }}</h5>
+                                </div>
+                                {% autoescape off %}
+                                    {{ humanities.desc }}
+                                {% endautoescape %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

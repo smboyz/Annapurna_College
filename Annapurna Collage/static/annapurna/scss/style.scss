@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.705);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+@import 'home';
+@import 'about';
+@import 'plus2Program';

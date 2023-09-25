@@ -1,0 +1,107 @@
+{% load static %}
+<!-- footer section start -->
+<footer class="pt-5">
+    {% for globs in glob %}
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-3 col-12 text-center">
+                    <img class="img-thumbnails img-fluid about_logo"
+                         style="border-radius: 50%;
+                                width: 40%"
+                         src="{{ globs.logo.url }}"
+                         alt="">
+                    <h4 class="text-light my-3" id="heading">{{ globs.SiteName }}</h4>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <div class="d-flex">
+                        <h5 class="title-line">Contact</h5>
+                    </div>
+                    <ul class="my-3 contact">
+                        <li class="footer_content ps-4">
+                            <i class="fa-solid fa-location-dot"></i>{{ globs.SiteAddress }}
+                        </li>
+                        <li class="footer_content my-2 ps-4">
+                            <i class="fa-solid fa-phone"></i>{{ globs.SiteContact }}
+                        </li>
+                        <li class="footer_content ps-4">
+                            <i class="fa-solid fa-envelope"></i>{{ globs.SiteEmail }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-12">
+                    <div class="d-flex">
+                        <h5 class="quick_links_title title-line">
+                            Quick
+                            Links
+                        </h5>
+                    </div>
+                    <ul class="quick_links">
+                        <li class="mt-3">
+                            <a href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="my-2">
+                            <a href="{% url 'admission' %}">Admission</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'newsevents' %}">Notice</a>
+                        </li>
+                        <li class="my-2">
+                            <a href="{% url 'photogallery' %}">Photo Gallery</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'newsevents' %}">News & Events</a>
+                        </li>
+                        <li class="my-2">
+                            <a href="{% url 'contact' %}">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <div class="d-flex">
+                        <h5 class="title-line">Maps</h5>
+                    </div>
+                    <iframe class="my-3 map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.078173652442!2d85.34076757461294!3d27.71487252516101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb196026e28549%3A0xac626cc95e5dedcc!2sAnnapurna%20National%20College!5e0!3m2!1sen!2snp!4v1693050058469!5m2!1sen!2snp"
+                            width="90%"
+                            height="180px"
+                            style="border:0"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="text-white " style="font-size: 14px; background: #0c0c0cbd;">
+            <div class="container">
+                <div class="row justify-content-between align-items-center pt-3">
+                    <div class="col-lg-7 col-12 text-center">
+                        <p>
+                            Copyright © 2023 | All Right Reserved. Developed by <a href="https://radiantnepal.com/" target="_blank"><span class="fw-semibold" style="color: #FE0002;">Radiant Infotech</span> <span class="fw-semibold" style="color:#0c85f6;">Nepal Pvt. Ltd.</span></a>
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-12 d-flex justify-content-end align-items-center gap-3 pb-4 footer_icon">
+                        <a class="text-light" href="{{ globs.Sitefacebooklink }}" target:_blank><i class="fa-brands fa-facebook-f"></i></a>
+                        <a class="text-light" href="{{ globs.Siteinstagramlink }}"><i class="fa-brands fa-instagram" target:_blank></i></a>
+                        <a class="text-light" href="{{ globs.Sitetwitterlink }}"><i class="fa-brands fa-twitter" target:_blank></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</footer>
+<script>
+    window.onload = function() {
+    const head = document.getElementById('heading');
+    const word = head.innerHTML;
+    const words = word.split(" ");
+    const firstWord = words[0];
+    const otherWords = words.slice(1).join(' ');
+    
+    // Create new HTML with span elements and apply styles
+    const newHTML = `<span style="color:#FE0002;text-transform:uppercase">${firstWord}</span><br> <span style="color:#0C2EF6; text-transform:uppercase">${otherWords}</span>`;
+    
+    // Set the new HTML content inside the 'heading' element
+    head.innerHTML = newHTML;
+};
+</script>
+<!-- footer section end -->

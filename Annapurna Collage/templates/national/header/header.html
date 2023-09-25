@@ -1,0 +1,99 @@
+{% load static %}
+<!-- up arrow section start -->
+<a href="#"
+   style="bottom: 10%;
+          right: 5%;
+          display: none"
+   class="position-fixed btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="fa-solid fa-arrow-up"></i></a>
+<!-- up arrow section end -->
+<!-- top section start -->
+{% for globs in glob %}
+    <section class="top">
+        <div class="container">
+            <div class="row justify-content-between align-items-center"
+                 style="height: 25px">
+                <div class="col-lg-10 col-12">
+                    <marquee behavior=""
+                             direction=""
+                             onmouseover="this.stop()"
+                             onmouseout="this.start()">
+                        <p style="font-style: italic">{{ globs.Sitedescription }}</p>
+                    </marquee>
+                </div>
+                <div class="col-lg-2 col-8 d-flex justify-content-end align-items-center gap-3 pb-4 top_icon">
+                    <a class="text-light" href="{{ globs.Sitefacebooklink }}"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a class="text-light" href="{{ globs.Siteinstagramlink }}"><i class="fa-brands fa-instagram"></i></a>
+                    <a class="text-light" href="{{ globs.Sitetwitterlink }}"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- top section end -->
+    <!----header section start-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{{ globs.logo.url }}"
+                     alt=""
+                     title="Annapurna National College"
+                     style="width: 25%" />
+            </a>
+        {% endfor %}
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span><i class="fa-solid fa-bars text-light"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1 text-center"
+                style="font-size: 14px">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                {% for nav in main %}
+                    {% if nav.id != 1 %}
+                        {% if nav.id == 94 %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about' %}">{{ nav.name }}</a>
+                            </li>
+                        {% elif nav.id == 149 %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'admission' %}">{{ nav.name }}</a>
+                            </li>
+                        {% elif nav.id == 143 %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'newsevents' %}">{{ nav.name }}</a>
+                            </li>
+                        {% elif nav.childs.all %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">{{ nav.name }}</a>
+                                <ul class="dropdown-menu" style="min-width: 210px">
+                                    {% for sub_nav in nav.childs.all %}
+                                        {% if sub_nav.status == 'Publish' %}
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'submenu' name=sub_nav.id %}">{{ sub_nav.name }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'menu' name=nav.id %}">{{ nav.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!----header section end-->

@@ -1,0 +1,82 @@
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'about' %}">About Us</a>
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">Academic Programs</a>
+    <ul class="dropdown-menu" style="min-width: 210px">
+        <li>
+            <a class="dropdown-item" href="{% url 'plus2Program' %}">+2 Programs</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="{% url 'bachelor' %}">Bachelors Programs</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">Gallery</a>
+    <ul class="dropdown-menu">
+        <li>
+            <a class="dropdown-item" href="{% url 'photogallery' %}">Photo Gallery</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="{% url 'videoGallery' %}">Video Gallery</a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'admission' %}">Admission</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'newsevents' %}">News & Events</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+</li>
+
+
+
+import csv
+
+from django.contrib.auth import get_user_model
+from django.http import FileResponse, HttpResponse
+from django.views.generic import View
+
+from newspaper.models import Post
+
+
+User=get_user_model()
+
+COLUMNS=[
+    "first_name",
+    "last_name",
+    "username",
+    "email",
+    "is_staff",
+    "is_active",
+    "is_superuser",
+    "last_login",
+    "date_joined",
+]
+
+class UserReportView(View):
+    def get(self, request):
+        response=HttpResponse(content_type="text/csv")
+        response["Content-Disposition"]="attachment; filename=users.csv"
+        
+        users=User.objects.all().only(*COLUMNS).values(*COLUMNS)
+        print(users)
+        
+        
+        writer=csv.DictWriter(response, fieldnames=users[0].keys())
+        writer.writeheader()
+        writer.writerows(users)
+        
+        return response

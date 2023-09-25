@@ -1,0 +1,116 @@
+{% extends "national/base.html" %}
+{% load static %}
+{% block content %}
+    <!-- admission banner section start -->
+    {% for whys in why %}
+        <section class="position-relative">
+            <img class="w-100"
+                 style="max-height: 400px;
+                        object-fit: cover"
+                 src="{{ whys.slider_image.url }}"
+                 alt="" />
+            <h2 class="position-absolute banner_title">{{ whys.name }}</h2>
+            <div class="position-absolute"
+                 style="top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: black;
+                        opacity: 0.65"></div>
+            <div class="position-absolute bread_crumb" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ whys.name }}</li>
+                </ol>
+            </div>
+        </section>
+        <!-- admission banner section end -->
+        <section style="background: #b8bfc423">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-12 d-flex justify-content-center">
+                        <h3 class="title-line">{{ whys.name }}</h3>
+                    </div>
+                </div>
+                <div class="row justify-content-between my-5">
+                    <div class="col-lg-4 col-12">
+                        <div>
+                            {% for whys_7 in why_7 %}<h5 style="color: #FE0002;">{{ whys_7.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_1 in why_1 %}<li>{{ whys_1.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            {% for whys_8 in why_8 %}<h5 style="color: #FE0002;">{{ whys_8.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_2 in why_2 %}<li>{{ whys_2.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12 text-center">
+                        <img class="middle-img" src="{{ whys.bannerimage.url }}" alt="" />
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div>
+                            {% for whys_9 in why_9 %}<h5 style="color: #FE0002;">{{ whys_9.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_3 in why_3 %}<li>{{ whys_3.name }}</li>{% endfor %}
+                                {% for whys_5 in why_5 %}
+                                    <li>{{ whys_5.name }}</li>
+                                    <span class="ms-2">
+                                        {% autoescape off %}
+                                            {{ whys_5.short_desc }}
+                                        {% endautoescape %}
+                                    </span>
+                                {% endfor %}
+                                {% for whys_4 in why_4 %}
+                                    <li>{{ whys_4.name }}</li>
+                                    <span class="ms-2">
+                                        {% autoescape off %}
+                                            {{ whys_4.short_desc }}
+                                        {% endautoescape %}
+                                    </span>
+                                {% endfor %}
+                                {% for whys_6 in why_6 %}<li>{{ whys_6.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between my-5">
+                    <div class="col-lg-4 col-12">
+                        <div>
+                            {% for whys_10 in why_10 %}<h5 style="color: #fe0002">{{ whys_10.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_11 in why_11 %}<li>{{ whys_11.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            {% for whys_14 in why_14 %}<h5 style="color: #fe0002">{{ whys_14.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_15 in why_15 %}<li>{{ whys_15.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12 text-center">
+                        <img class="middle-img" src="{{ whys.image.url }}" alt="" />
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div>
+                            {% for whys_12 in why_12 %}<h5 style="color: #fe0002">{{ whys_12.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_13 in why_13 %}<li>{{ whys_13.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            {% for whys_16 in why_16 %}<h5 style="color: #fe0002">{{ whys_16.name }}</h5>{% endfor %}
+                            <ul class="wcanc">
+                                {% for whys_17 in why_17 %}<li>{{ whys_17.name }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock content %}

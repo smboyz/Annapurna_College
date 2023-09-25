@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+             id="navbarBlur"
+             navbar-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <h6 class="font-weight-bolder mb-0">Create New</h6>
+                </nav>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <style>
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+              }
+              
+              .card {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #f5f5f5;
+                padding: 20px;
+              }
+              
+              .card-body {
+                padding: 0;
+              }
+              
+              .table-responsive {
+                overflow-x: auto;
+              }
+              
+              .form-group {
+                margin-bottom: 20px;
+              }
+              
+              label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+              }
+              
+              input[type="text"],
+              textarea,
+              input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+              }
+              
+              textarea {
+                height: 100px;
+              }
+              
+              button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+              }
+              
+              button:hover {
+                background-color: #45a049;
+              }
+              
+              button:active {
+                background-color: #3e8948;
+              }
+              
+              button:focus {
+                outline: none;
+              }
+              
+        </style>
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Detail</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <div class="container">
+                                    <div class="card">
+                                        <form method="POST"
+                                              action="{% url 'navigation' %}"
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {% comment %} {{ form }}
+                                            <input type="hidden" name="next" value="{{ request.path }}">  {% endcomment %}
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Name</label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input type="text" name="name" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Caption</label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input type="text" name="caption">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Status</label>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <select name="status">
+                                                                    <option value="">Select Status</option>
+                                                                    <option value="Publish">Publish</option>
+                                                                    <option value="Draft">Draft</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Position</label>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <input type="number" name="position" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Page Type</label>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <select name="page_type" required>
+                                                                    <option value="">Select Page Type</option>
+                                                                    <option value="Home">Home</option>
+                                                                    <option value="Home/About">Home/About</option>
+                                                                    <option value="About">About</option>
+                                                                    <option value="Normal">Normal</option>
+                                                                    <option value="Home/Gallery">Home/Gallery</option>
+                                                                    <option value="Slider">Slider</option>
+                                                                    <option value="Program">Program</option>
+                                                                    <option value="Group">Group</option>
+                                                                    <option value="Program_1">Program_1</option>
+                                                                    <option value="Why">Why</option>
+                                                                    <option value="Why_1">Why_1</option>
+                                                                    <option value="Why_2">Why_2</option>
+                                                                    <option value="Why_3">Why_3</option>
+                                                                    <option value="Why_4">Why_4</option>
+                                                                    <option value="Why_5">Why_5</option>
+                                                                    <option value="Why_6">Why_6</option>
+                                                                    <option value="Why_7">Why_7</option>
+                                                                    <option value="Why_8">Why_8</option>
+                                                                    <option value="Why_9">Why_9</option>
+                                                                    <option value="Why_10">Why_10</option>
+                                                                    <option value="Why_11">Why_11</option>
+                                                                    <option value="Why_12">Why_12</option>
+                                                                    <option value="Why_13">Why_13</option>
+                                                                    <option value="Why_14">Why_14</option>
+                                                                    <option value="Why_15">Why_15</option>
+                                                                    <option value="Why_16">Why_16</option>
+                                                                    <option value="Why_17">Why_17</option>
+                                                                    <option value="Testimonials">Testimonials</option>
+                                                                    <option value="Testimonials_1">Testimonials_1</option>
+                                                                    <option value="About_1">About_1</option>
+                                                                    <option value="About_2">About_2</option>
+                                                                    <option value="About_3">About_3</option>
+                                                                    <option value="Science">Science</option>
+                                                                    <option value="Management">Management</option>
+                                                                    <option value="Humanities">Humanities</option>
+                                                                    <option value="BBS">BBS</option>
+                                                                    <option value="BBA">BBA</option>
+                                                                    <option value="Bsc.CSIT">Bsc.CSIT</option>
+                                                                    <option value="+2 Program">+2 Program</option>
+                                                                    <option value="Bachelors Program">Bachelors Program</option>
+                                                                    <option value="SubjectTitle">SubjectTitle</option>
+                                                                    <option value="SubjectTitle_1">SubjectTitle_1</option>
+                                                                    <option value="Science_1">Science_1</option>
+                                                                    <option value="Management_1">Management_1</option>
+                                                                    <option value="Humanities_1">Humanities_1</option>
+                                                                    <option value="BBS_1">BBS_1</option>
+                                                                    <option value="BBA_1">BBA_1</option>
+                                                                    <option value="Bsc.CSIT_1">Bsc.CSIT_1</option>
+                                                                    <option value="Gallery">Gallery</option>
+                                                                    <option value="Gallery_1">Gallery_1</option>
+                                                                    <option value="Video">Video</option>
+                                                                    <option value="Video_1">Video_1</option>
+                                                                    <option value="Contact">Contact</option>
+                                                                    <option value="New/Event">New/Event</option>
+                                                                    <option value="New/Event_1">New/Event_1</option>
+                                                                    <option value="Admission">Admission</option>
+                                                                    <option value="Popup">Popup</option>
+                                                                    <option value="Gallery_2">Gallery_2</option>
+                                                                    <option value="Gallery_3">Gallery_3</option>
+                                                                    <option value="Gallery_4">Gallery_4</option>
+                                                                    <option value="Gallery_5">Gallery_5</option>
+                                                                    <option value="Gallery_6">Gallery_6</option>
+                                                                    {% comment %}
+                                                                    <option value="Recruitment">Recruitment</option>
+                                                                    <option value="News">News</option>
+                                                                    <option value="Client1">Client1</option>
+                                                                    <option value="Client2">Client2</option>
+                                                                    <option value="Legal Document">Legal Document</option>
+                                                                    <option value="Message">Message</option>
+                                                                    <option value="Our Vision">Our Vision</option>
+                                                                    <option value="Job Details">Job Details</option>
+                                                                    <option value="UNSKILLED">UNSKILLED</option>
+                                                                    <option value="SKILLED">SKILLED</option>
+                                                                    <option value="SEMISKILLED">SEMISKILLED</option>
+                                                                    <option value="HIGHLYSKILLED">HIGHLYSKILLED</option>
+                                                                    <option value="All detail">All detail</option>
+                                                                    <option value="SKILLED 1">SKILLED 1</option>
+                                                                    <option value="Our Instructors">Our Instructors</option>
+                                                                    <option value="Instructors">Instructors</option>
+                                                                    <option value="Countries">Countries</option>
+                                                                    <option value="Service 1">Service 1</option>
+                                                                    {% endcomment %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Parent</label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <input type="number" name="Parent" value="{{ parent_id }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Title</label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <input type="text" name="title">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="col-12 p-2">
+                                                                <label for="short_desc">Short Description</label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <textarea class="summernote" id="summernote" name="short_desc"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="col-12 p-2">
+                                                                <label>Description</label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <textarea class="summernote" id="summernote" name="desc"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Meta Title</label>
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <input type="text" name="meta_title" value="{{ obj.meta_title }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Meta Keyword</label>
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <input type="text" name="meta_keyword" value="{{ obj.meta_keyword }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Banner Image</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="file" name="bannerimage">
+                                                                {% if obj.bannerimage %}
+                                                                    <img src="{{ obj.bannerimage.url }}" style="max-width: 50%; height: auto" />
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Image</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="file" name="image">
+                                                                {% if obj.image %}
+                                                                    <img src="{{ obj.image.url }}" style="max-width: 50%; height: auto" />
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mt-5">
+                                                            <div class="col-12 p-2">
+                                                                <label>Slider Image</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="file" name="slider_image">
+                                                                {% if obj.slider_image %}
+                                                                    <img src="{{ obj.slider_image.url }}" style="max-width: 50%; height: auto">
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 p-2">
+                                                                <label>Icon Image</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="text" name="icon_image" value="{{ obj.icon_image }}">
+                                                                {% comment %} {% if obj.icon_image %}
+                                                                    <img src="{{ obj.icon_image.url }}" style="max-width: 50%; height: auto">
+                                                                {% endif %} {% endcomment %}
+                                                            </div>
+                                                        </div>
+                                                        {% comment %} <div class="col-6 mt-5">
+                                                            <div class="col-12 p-2">
+                                                                <label>Brochure</label>
+                                                            </div>
+                                                            <div class="col-8 mt-5">
+                                                                <input type="file" name="brochure">
+                                                                {% if obj.brochure %}
+                                                                    <a href="{{ obj.brochure.url }}">{{ obj.brochure }}
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div> {% endcomment %}
+                                                            <div class="col-6 mt-5">
+                                                                <div class="col-12 p-2">
+                                                                    <label for="video">Video</label>
+                                                                </div>
+                                                                <div class="col-8 mt-5">
+                                                                    <input name="video" type="file" id="video">
+                                                                    {% if obj.video %}
+                                                                        <video controls style="max-width: 50%; height: auto">
+                                                                            <source src="{{ obj.video.url }}" type="video/mp4">
+                                                                            <!-- You can add additional source elements for different video formats -->
+                                                                        </video>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="container">
+                                                                    <div class="row"></div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="col-12 mt-5">
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+        var inps = document.querySelectorAll('.input');
+        [].forEach.call(inps, function(inp) {
+        inp.onchange = function(e) {
+        console.log(this.files);
+        };
+        });
+        </script>
+    {% endblock content %}

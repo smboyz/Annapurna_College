@@ -1,0 +1,95 @@
+{% extends "national/base.html" %}
+{% load static %}
+{% block content %}
+    <!-- news and events section start -->
+    {% for news in new %}
+        <section class="position-relative">
+            <img class="w-100"
+                 style="max-height: 400px;
+                        object-fit:cover"
+                 src="{{ news.slider_image.url }}"
+                 alt="">
+            <h2 class="position-absolute banner_title text-center">{{ news.caption }}</h2>
+            <div class="position-absolute"
+                 style="top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: black;
+                        opacity: 0.65;"></div>
+            <div class="position-absolute bread_crumb" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ news.name }}</li>
+                </ol>
+            </div>
+        </section>
+        <!-- news and events section end -->
+        <section style="background:#b8bfc423; padding: 3% 0;">
+            <div class="container">
+                <div class="d-flex py-3">
+                    <h5 class="title-line">{{ news.title }}</h5>
+                </div>
+                <ol>
+                    <div class="row row-gap-5">
+                        {% for news in page_obj %}
+                            <div class="col-lg-3 col-12 notice-div"
+                                 style="height: 320px;
+                                        overflow: hidden;
+                                        font-size: 14px">
+                                <li class="mx-2">
+                                    <p>
+                                        {% autoescape off %}
+                                            {{ news.short_desc }}
+                                        {% endautoescape %}
+                                    </p>
+                                    <img class="w-100 img-fluid"
+                                         style="height: 100px;
+                                                object-fit: cover"
+                                         src="{{ news.bannerimage.url }}"
+                                         alt="">
+                                    <a class="fs-6 readmore fw-semibold d-block my-3"
+                                       href="{% url 'event' id=news.pk %}"
+                                       data-aos="zoom-in">Read
+                                    More <i class="fa-solid fa-arrow-right-long"></i></a>
+                                </li>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </ol>
+            </div>
+        </section>
+        <div aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}"
+                           aria-label="Previous">Previous</a>
+                    </li>
+                {% endif %}
+                {% for i in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}"
+                           aria-label="Next">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.paginator.num_pages }}"
+                           aria-label="Last">Last</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock content %}

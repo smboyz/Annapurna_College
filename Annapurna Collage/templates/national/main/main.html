@@ -1,0 +1,245 @@
+{% load static %}
+<!-- banner section start -->
+<div id="carouselExampleAutoplaying"
+     class="carousel slide"
+     data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for sliders in sli %}
+            <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}"
+                 data-bs-interval="10000">
+                <img src="{{ sliders.slider_image.url }}"
+                     class="d-block w-100 slider"
+                     style="object-fit:cover"
+                     alt="...">
+            </div>
+        {% endfor %}
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- banner section end -->
+<!-- about section start -->
+<section class="aboutsection">
+    <div class="container">
+        {% for about in abo %}
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-12 my-5 text-center anim"
+                     data-aos="fade-right"
+                     data-aos-offset="300"
+                     data-aos-easing="ease-in-sine">
+                    <img class="w-50 my-2 about_logo img-fluid"
+                         style="border-radius: 50%"
+                         src="{{ about.bannerimage.url }}"
+                         alt="">
+                    <h2 class="text-light">
+                        <span style="color:#FE0002;">{{ about.caption }}</span> <span style="color:#0C2EF6;">{{ about.title }}</span>
+                    </h2>
+                </div>
+                <div class="col-lg-7 col-12 offset-lg-1 anim"
+                     data-aos=""
+                     data-aos-offset="300"
+                     data-aos-easing="ease-in-sine">
+                    <p class="fs-5 about_text" style="text-align: justify;">
+                        <span style="color: #FE0002; font-size: 22px; font-weight: 700;">{{ about.meta_title }}</span>
+                        {{ about.desc }}
+                    </p>
+                    <a class="fs-4 readmore fw-semibold"
+                       href="{% url 'about' %}"
+                       data-aos="zoom-in">Read More <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- about section end -->
+<!-- ourprogram section start -->
+<section style="padding: 5% 0;
+                background: linear-gradient(rgba(224, 175, 175, 0.514), rgba(148, 148, 216, 0.507))">
+    <div class="container">
+        {% for pros in pro %}
+            <div class="row justify-content-between">
+                <div class="col-lg-4 col-12 d-flex" data-aos="zoom-in">
+                    <h3 class="title-line">{{ pros.name }}</h3>
+                </div>
+                <div class="col-lg-3 col-12" data-aos="zoom-in">
+                    <a class="fs-5 readmore" href="{% url 'plus2Program' %}">View All Courses <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-5 ourprogram">
+            {% for program in pro_1 %}
+                <div class="col-lg-4 col-12"
+                     data-aos="fade-down"
+                     data-aos-easing="linear"
+                     data-aos-duration="1500">
+                    <div class="our-program">
+                        <img class="w-100 img-border" src="{{ program.bannerimage.url }}" alt="">
+                        <div class="anim-box"></div>
+                        <h4 class="text-center title-program readmore">{{ program.name }}</h4>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- ourprogram section end -->
+<!-- why to choose annapurna college section start -->
+<section style="background: #b8bfc423;">
+    <div class="container py-5">
+        {% for whys in why %}
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-12 d-flex justify-content-center"
+                     data-aos="zoom-in">
+                    <h3 class="title-line">{{ whys.name }}</h3>
+                </div>
+            </div>
+            <div class="row justify-content-between my-5">
+                <div class="col-lg-4 col-12">
+                    <div data-aos="fade-down"
+                         data-aos-easing="linear"
+                         data-aos-duration="1500">
+                        {% for whys_7 in why_7 %}<h5 style="color: #FE0002;">{{ whys_7.name }}</h5>{% endfor %}
+                        <ul class="wcanc">
+                            {% for whys_1 in why_1 %}<li>{{ whys_1.name }}</li>{% endfor %}
+                        </ul>
+                    </div>
+                    <div data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1500">
+                        {% for whys_8 in why_8 %}<h5 style="color: #FE0002;">{{ whys_8.name }}</h5>{% endfor %}
+                        <ul class="wcanc">
+                            {% for whys_2 in why_2 %}<li>{{ whys_2.name }}</li>{% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12 text-center">
+                    <img class="middle-img" src="{{ whys.bannerimage.url }}" alt="">
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1500">
+                        {% for whys_9 in why_9 %}<h5 style="color: #FE0002;">{{ whys_9.name }}</h5>{% endfor %}
+                        <ul class="wcanc">
+                            {% for whys_3 in why_3 %}<li>{{ whys_3.name }}</li>{% endfor %}
+                            {% for whys_5 in why_5 %}
+                                <li>{{ whys_5.name }}</li>
+                                <span class="ms-2">
+                                    {% autoescape off %}
+                                        {{ whys_5.short_desc }}
+                                    {% endautoescape %}
+                                </span>
+                                <br>
+                                {% comment %} <span class="ms-2"><i class="fa-solid fa-minus"></i> Second Academic Exellency
+                                Tests</span>
+                                <br>
+                                <span class="ms-2"><i class="fa-solid fa-minus"></i> Third Academic Exellency Tests</span> {% endcomment %}
+                            {% endfor %}
+                            {% for whys_4 in why_4 %}
+                                <li>{{ whys_4.name }}</li>
+                                <span class="ms-2">
+                                    {% autoescape off %}
+                                        {{ whys_4.short_desc }}
+                                    {% endautoescape %}
+                                </span>
+                                <br>
+                            {% endfor %}
+                            {% comment %} <span class="ms-2"><i class="fa-solid fa-minus"></i> Second Terminal Examination</span>
+                            <br>
+                            <span class="ms-2"><i class="fa-solid fa-minus"></i> Pre Board Examination as per
+                            HISSAN</span>
+                            <br>
+                            <span class="ms-2"><i class="fa-solid fa-minus"></i> Board Examination as per NEB</span> {% endcomment %}
+                            {% for whys_6 in why_6 %}<li>{{ whys_6.name }}</li>{% endfor %}
+                        </ul>
+                        <a class="fs-5 readmore fw-semibold"
+                           href="{% url 'why' %}"
+                           data-aos="zoom-in">Read More <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- why to choose annapurna college section end -->
+<!-- Gallery section start -->
+{% for gallery in gall %}
+    <section style="padding: 5% 0;
+                    background: linear-gradient(rgba(224, 175, 175, 0.514), rgba(148, 148, 216, 0.507))">
+        <div class="container">
+            <div class="row justify-content-center z-1">
+                <div class="col-lg-4 col-12 d-flex justify-content-center"
+                     data-aos="zoom-in">
+                    <h3 class="title-line">{{ gallery.name }}</h3>
+                </div>
+            </div>
+            <div class="row my-5 gallery_content">
+                {% for gallery in gall_1|slice:":4" %}
+                    <div class="col-lg-3 col-12" data-aos="flip-right">
+                        <div class="position-relative gallery-box">
+                            <img style="border-radius: 10px"
+                                 class="w-100 img-fluid thumbnails"
+                                 src="{{ gallery.bannerimage.url }}"
+                                 alt="">
+                            {% comment %} <p class="text-center position-absolute galery-title">welcome and orientation program 2080</p> {% endcomment %}
+                            <div class="position-absolute dark1"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-12 text-center" data-aos="zoom-in">
+                    <a class="fs-5 readmore fw-semibold text-center"
+                       href="{% url 'photogallery' %}">View More <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endfor %}
+<!-- Gallery section end -->
+<!-- Testimonial section start -->
+<section style="background: #b8bfc423;">
+    {% for tess in tes_1 %}
+        <div class="container py-4" data-aos="zoom-in">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-12 d-flex justify-content-center my-5">
+                    <h3 class="title-line">{{ tess.name }}</h3>
+                </div>
+            </div>
+            <div class="owl-carousel" style="font-size: 14px;">
+                {% for Testimonial in tes %}
+                    <div class="carousel_items">
+                        <img class="img-thumbnails img-fluid testimonial_img"
+                             src="{{ Testimonial.bannerimage.url }}"
+                             alt="">
+                        <p>{{ Testimonial.desc }}</p>
+                        <p>{{ Testimonial.name }}</p>
+                        <p>{{ Testimonial.caption }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</section>
+<!-- Testimonial section end -->
+<script>
+    const head = document.getElementById('heading');
+    const word = head.innerHTML;
+    const words = word.split(" ");
+    const firstWord = words[0];
+    const otherWords = words.slice(1).join(' ');
+    
+    // Create new HTML with span elements and apply styles
+    const newHTML = `<span style="color:#FE0002;text-transform:uppercase">${firstWord}</span><br> <span style="color:#0C2EF6; text-transform:uppercase">${otherWords}</span>`;
+    
+    // Set the new HTML content inside the 'heading' element
+    head.innerHTML = newHTML;
+</script>

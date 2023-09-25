@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+         id="navbarBlur"
+         navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <h6 class="font-weight-bolder mb-0">ADMISSION FORMS</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Detail</h6>
+              </div>
+            </div>
+            <div class="container-fluid py-4">
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                  <form method="POST" action="{% url 'delete_admi' %}">
+                    {% csrf_token %}
+                    <tr>
+                      <td>
+                        <!-- "Select All" checkbox -->
+                        <input type="checkbox" id="select-all">
+                      </td>
+                      <!-- Add a dummy header for "Select All" -->
+                      <th>Select All</th>
+                    </tr>
+                    <table class="table align-items-center mb-0">
+                      <tr>
+                        <th>Select</th>
+                        <th>S.N</th>
+                        <th>Name</th>
+                        <th>Mobile Number</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+                      </tr>
+                      {% for cons in page_obj %}
+                        <tr>
+                          <td>
+                            <input type="checkbox" name="selected_items" value="{{ cons.pk }}">
+                          </td>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ cons.name }}</td>
+                          <td>{{ cons.mobile }}</td>
+                          <td>{{ cons.gender }}</td>
+                          <td>
+                            <button class="btn btn-sm" type="button" id="detailsButton">
+                              <a href="{% url 'admission_1' pk=cons.pk %}"
+                                 style="text-decoration: none;
+                                        color: white">Details</a>
+                            </button>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                    <div>
+                      <button type="submit" class="btn btn-danger btn-sm deleteButton">Delete</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="First">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link"
+               href="?page={{ page_obj.previous_page_number }}"
+               aria-label="Previous">Previous</a>
+          </li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+          <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link"
+               href="?page={{ page_obj.next_page_number }}"
+               aria-label="Next">Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link"
+               href="?page={{ page_obj.paginator.num_pages }}"
+               aria-label="Last">Last</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectAllCheckbox = document.getElementById("select-all");
+        const itemCheckboxes = document.querySelectorAll('input[name="selected_items"]');
+
+        selectAllCheckbox.addEventListener("change", function () {
+            itemCheckboxes.forEach(itemCheckbox => {
+                itemCheckbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+        itemCheckboxes.forEach(itemCheckbox => {
+            itemCheckbox.addEventListener("change", function () {
+                const allChecked = Array.from(itemCheckboxes).every(item => item.checked);
+                selectAllCheckbox.checked = allChecked;
+            });
+        });
+    });
+    </script>
+    <style>
+      .deleteButton {
+        background: #d50216 !important;
+        color: white !important;
+      }
+    </style>
+  {% endblock content %}
